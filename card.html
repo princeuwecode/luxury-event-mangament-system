@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <link rel="stylesheet" href="/card.css" />
+</head>
+<body>
+  <input type="checkbox" id="check" checked />
+  <label for="check">
+    <i class="fas fa-bars" id="btn"></i>
+    <i class="fas fa-times" id="cancel"></i>
+  </label>
+
+  <div class="top-bar">
+    <div class="search-bar">
+      <input type="text" placeholder="Search..." />
+      <button><i class="fas fa-search"></i></button>
+    </div>
+  </div>
+  
+
+  <div class="sidebar">
+    <header class="services-header"><h3>Menu</h3></header>
+    <ul>
+      <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="#"><i class="fas fa-glass-cheers"></i> Events</a></li>
+      <li><a href="#"><i class="fas fa-utensils"></i> Caterers</a></li>
+      <li><a href="#"><i class="fas fa-volume-up"></i> Sound Systems</a></li>
+      <li><a href="#"><i class="fas fa-history"></i>My-Booking</a></li>
+      <li><a href="/login.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="/login.html"><i class="fas fa-sign-out-alt"></i> Log out</a></li>
+    </ul>
+  </div>
+
+  <section>
+    <header>Event</header>
+
+    <div class="card-container">
+      <div class="card">
+        <img src="/wedding.jpg" alt="Wedding Party" />
+        <div class="card-content">
+          <h3>Wedding Party</h3>
+          <p>Join us as we celebrate the beginning of our forever. make our wedding day truly special.</p>
+          <p>Price:-200000</p>
+          <a href="#" class="btn book-now" data-item="Wedding party">Add to Cart</a>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="/birthday.jpg" alt="Birthday Party" />
+        <div class="card-content">
+          <h3>Birthday Party</h3>
+          <p>Come celebrate another year of joy and memories! Join us for fun, laughter.</p>
+          <p>Price:-50000</p>
+          <a href="#" class="btn book-now" data-item="Birthday Party">Add to Cart</a>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="/Corporate-Events.jpg" alt="Corporate Event" />
+        <div class="card-content">
+          <h3>Corporate Event</h3>
+          <p>Join us for an exclusive corporate gathering—an opportunity to connect.</p>
+          <P>Price:-100000</P>
+          <a href="#" class="btn book-now" data-item="Corporate Event">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+    <header>Caterers</header>
+
+    <div class="card-container">
+      <div class="card">
+        <img src="/veg dishes.jpg" alt="Veg Dishes" />
+        <div class="card-content">
+          <h3>Veg Dishes</h3>
+          <p>Delicious vegetarian cuisine prepared with love and flavor. Perfect for traditional and modern events alike.</p>
+          <a href="#" class="btn" id="vegBtn">View Menu</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="/nonveg.jpg">
+        <div class="card-content">
+          <h3>Non-Veg Dishes</h3>
+          <p>Enjoy mouth-watering non-veg selections, from spicy grills to classic roasts—crafted to impress every guest.</p>
+          <a href="#" class="btn" id="nonVegBtn">View Menu</a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="menu-chart" id="veg-menu">
+      <button class="close-menu" aria-label="Close Veg Menu">&times;</button>
+      <h2>Veg Menu</h2>
+      <p style="text-align: center;   color: black; font-weight: light; margin-bottom: 10px; font-style: italic;">Please click "Add to Cart" and enter your desired quantity in the next step</p>
+
+      <div class="menu-row">
+        <div class="menu-column">
+          <h3>Starters</h3>
+          <ul>
+            <li>Paneer Tikka</li>
+            <li>Stuffed Mushrooms</li>
+            <li>Cheese Balls</li>
+            <li>Noodles</li>
+            <li>Aloo Tikki</li>
+          </ul>
+        </div>
+        <div class="menu-column">
+          <h3>Main Course</h3>
+          <ul>
+            <li>Paneer Butter Masala</li>
+            <li>Mixed Veg Curry</li>
+            <li>Jeera Rice</li>
+            <li>Naan & Roti Basket</li>
+            <li>Dal Makhani</li>
+          </ul>
+        </div>
+        <div class="menu-column">
+          <h3>Beverages</h3>
+          <ul>
+            <li>Mojito</li>
+            <li>Virgin Mary</li>
+            <li>Mocktails</li>
+            <li>Soft Drinks</li>
+            <li>Pina Colada</li>
+          </ul>
+        </div>
+        <div class="menu-column">
+          <h3>Desserts</h3>
+          <ul>
+            <li>Chocolate Mousse</li>
+            <li>Custard</li>
+            <li>Gajar Halwa</li>
+            <li>Brownie with Ice Cream</li>
+            <li>Chocolate Tuffle</li>
+          </ul>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 20px;">
+      <a href="#" class="btn book-now" data-item="Veg Menu">Add to Cart</a>
+      </div>
+    </div>
+    
+    <div class="menu-chart" id="nonveg-menu">
+      <button class="close-menu" aria-label="Close Non-Veg Menu">&times;</button>
+      <h2>Non-Veg Menu</h2>
+      <p style="text-align: center; font-style: italic;color: black; font-weight: light; margin-bottom: 10px;">Please click "Add to Cart" and enter your desired quantity in the next step</p>
+
+      <div class="menu-row">
+        <div class="menu-column">
+          <h3>Starters</h3>
+          <ul>
+            <li>Chicken Tikka</li>
+            <li>Fish Fingers</li>
+            <li>Tandoori Chicken</li>
+            <li>Chicken Lollipop</li>
+            <li>Seekh Kebab</li>
+          </ul>
+        </div>
+
+        <div class="menu-column">
+          <h3>Main Course</h3>
+          <ul>
+            <li>Butter Chicken</li>
+            <li>Chicken Biryani</li>
+            <li>Fish Curry</li>
+            <li>Garlic Naan</li>
+            <li>Mutton Rogan Josh</li>
+          </ul>
+        </div>
+
+        <div class="menu-column">
+          <h3>Beverages</h3>
+          <ul>
+            <li>Mint Mojito</li>
+            <li>Rose Lemonade</li>
+            <li>Pina Colada</li>
+            <li>Virgin Mary</li>
+            <LI>Lemon Iced</LI>
+          </ul>
+        </div>
+        
+        <div class="menu-column">
+          <h3>Desserts</h3>
+          <ul>
+            <li>Chocolate Mousse</li>
+            <li>Gajar Halwa</li>
+            <li>Custard</li>
+            <li>Brownie with Ice Cream</li>
+            <li>Chocolate Tuffle</li>
+          </ul>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 20px;">
+        <a href="#" class="btn book-now" data-item="Non-Veg Menu">Add to Cart</a>
+      </div>
+    </div>
+
+    <header>Sound System</header>
+    <div class="card-container">
+      <div class="card">
+        <img src="/dj-sound-system.jpg" alt="DJ System" />
+        <div class="card-content">
+          <h3>DJ System</h3>
+          <p>Bring your party to life with professional DJ setups, complete with booming bass.</p>
+          <P>Price:-50000</P>
+          <a href="#" class="btn book-now" data-item="DJ System">Add to Cart</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="/live band.jpg" alt="Live Band" />
+        <div class="card-content">
+          <h3>Live Band</h3>
+          <p>Experience the magic of live music with our talented performers—perfect for weddings.</p>
+          <P>Price:-250000</P>
+          <a href="#" class="btn book-now" data-item="Live Band">Add to Cart</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="/rental system.jpeg" alt="Rental Sound System" />
+        <div class="card-content">
+          <h3>Rental Sound System</h3>
+          <p>Affordable and powerful sound systems available for rent—ideal for all types.</p>
+          <P>Price:-50000</P>
+          <a href="#" class="btn book-now" data-item="Rental Sound System">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="continue-btn-container">
+      <button class="continue-btn">Go to Cart</button>
+    </div>
+  <div id="quantityModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2 id="modalItemName">Item Name</h2>
+    <p>Price per plate: <span id="modalPrice"></span></p>
+    <label for="plateQty">How many plates do you want?</label><br />
+    <input type="number" id="plateQty" min="1" value="1" />
+    <p>Total Price: ₹<span id="totalPrice"></span></p>
+    <button id="confirmAdd" class="btn">Add to Cart</button>
+  </div>
+</div>
+
+    
+  </section>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const vegBtn = document.getElementById("vegBtn");
+      const nonVegBtn = document.getElementById("nonVegBtn");
+      const vegMenu = document.getElementById("veg-menu");
+      const nonVegMenu = document.getElementById("nonveg-menu");
+    
+      const vegClose = vegMenu.querySelector(".close-menu");
+      const nonVegClose = nonVegMenu.querySelector(".close-menu");
+    
+      vegBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        vegMenu.classList.toggle("active");
+        nonVegMenu.classList.remove("active");
+      });
+    
+      nonVegBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        nonVegMenu.classList.toggle("active");
+        vegMenu.classList.remove("active");
+      });
+    
+      vegClose.addEventListener("click", () => {
+        vegMenu.classList.remove("active");
+      });
+    
+      nonVegClose.addEventListener("click", () => {
+        nonVegMenu.classList.remove("active");
+      });
+    
+      
+      const modal = document.getElementById("quantityModal");
+      const closeModalBtn = modal.querySelector(".close-modal");
+      const modalItemName = document.getElementById("modalItemName");
+      const modalPrice = document.getElementById("modalPrice");
+      const plateQtyInput = document.getElementById("plateQty");
+      const totalPriceSpan = document.getElementById("totalPrice");
+      const confirmAddBtn = document.getElementById("confirmAdd");
+    
+      let currentItem = "";
+      let pricePerPlate = 0;
+    
+    
+      function openModal(itemName, price) {
+        currentItem = itemName;
+        pricePerPlate = price;
+    
+        modalItemName.textContent = itemName;
+        modalPrice.textContent = pricePerPlate;
+        plateQtyInput.value = 1;
+        totalPriceSpan.textContent = pricePerPlate;
+    
+        modal.style.display = "block";
+      }
+    
+      
+      closeModalBtn.onclick = function () {
+        modal.style.display = "none";
+      };
+    
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+    
+     
+      plateQtyInput.addEventListener("input", () => {
+        let qty = parseInt(plateQtyInput.value);
+        if (isNaN(qty) || qty < 1) qty = 1;
+        totalPriceSpan.textContent = qty * pricePerPlate;
+      });
+    
+     
+      confirmAddBtn.addEventListener("click", () => {
+        let qty = parseInt(plateQtyInput.value);
+        if (isNaN(qty) || qty < 1) {
+          alert("Please enter a valid number of plates.");
+          return;
+        }
+    
+        const total = qty * pricePerPlate;
+    
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push({ item: currentItem, quantity: qty, total });
+        localStorage.setItem('cart', JSON.stringify(cart));
+    
+        alert(`${currentItem} added to cart!\nQuantity: ${qty}\nTotal: ₹${total}`);
+        modal.style.display = "none";
+      });
+    
+     
+      const bookButtons = document.querySelectorAll('.book-now');
+      bookButtons.forEach(button => {
+        button.addEventListener('click', e => {
+          e.preventDefault();
+          const item = button.getAttribute('data-item');
+    
+          if (item === "Veg Menu") {
+            openModal(item, 700);
+          } else if (item === "Non-Veg Menu") {
+            openModal(item, 1200);
+          } else {
+            
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ item });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(item + ' added to cart!');
+          }
+        });
+      });
+    
+      document.querySelector(".continue-btn").addEventListener("click", () => {
+  window.location.href = "/cart.html";
+});
+
+    });
+    </script>
+    <script src="/global-chatbot.js"></script>
+</body>
+</html>  
+  

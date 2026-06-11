@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Event Assistant</title>
+    <link rel="stylesheet" href="/static/chatbot.css">
+</head>
+<body>
+
+    <div class="chat-wrapper">
+        <div class="chat-header">
+            <div>
+                <h2>Luxury Event Management Assistant</h2>
+                <p>Your  Event Guide</p>
+            </div>
+            <button onclick="goBack()">✖</button>
+        </div>
+
+        <div class="quick-questions">
+            <button onclick="quickAsk('What services do you provide?')">Services</button>
+            <button onclick="quickAsk('Tell me about wedding packages')">Wedding</button>
+            <button onclick="quickAsk('Tell me about birthday events')">Birthday</button>
+            <button onclick="quickAsk('Show menu details')">Menu</button>
+            <button onclick="quickAsk('What are your prices?')">Pricing</button>
+            <button onclick="quickAsk('How can I book an event?')">Booking</button>
+            <button onclick="quickAsk('Do you provide decoration themes?')">Themes</button>
+            <button onclick="quickAsk('How can I contact you?')">about</button>
+            <button onclick="quickAsk('How can I contact you?')">Contact</button>
+        </div>
+
+        <div class="chat-box" id="chatBox">
+            <div class="bot-message">
+                Welcome to <strong>Luxury Event Management</strong> ✨<br><br>
+                I am your  event assistant.<br>
+                Ask me about our services, packages, booking, menu, themes, and more.
+            </div>
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" id="userInput" placeholder="Ask your luxury event question..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function goBack() {
+    window.history.back();
+}
+
+function quickAsk(question) {
+    document.getElementById("userInput").value = question;
+    sendMessage();
+}
+
+async function sendMessage() {
+    const input = document.getElementById("userInput");
+    const chatBox = document.getElementById("chatBox");
+
+    const userText = input.value.trim();
+    if (userText === "") return;
+
+    // User Message
+    const userMsg = document.createElement("div");
+    userMsg.className = "user-message";
+    userMsg.textContent = userText;
+    chatBox.appendChild(userMsg);
+
+    input.value = "";
+
+    // Bot Loading Message
+    const botMsg = document.createElement("div");
+    botMsg.className = "bot-message";
+    botMsg.textContent = "Typing...";
+    chatBox.appendChild(botMsg);
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    try {
+        const response = await fetch("http://127.0.0.1:8000/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ message: userText })
+        });
+
+        const data = await response.json();
+        botMsg.innerHTML = data.reply;
+
+    } catch (error) {
+        botMsg.textContent = "Sorry, the assistant is currently unavailable.";
+        console.error(error);
+    }
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// Enter key support
+document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("userInput");
+
+    input.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+            sendMessage();
+        }
+    });
+});
+    </script>
+    
+</body>
+</html>

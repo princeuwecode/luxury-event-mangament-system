@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luxury Event Management - Login</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/login.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div class="background-image"></div>
+  <header class="header">
+    <nav class="navbar">
+      <a href="/login.html">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+  
+  <div class="container">
+    <h2 class="main-logo"><i class='bx bxl-firebase'></i> Luxury Event Management</h2>
+    <div class="login-box">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <div class="input-box">
+          <i class='bx bxs-user'></i>
+          <input type="email" id="email" placeholder="Email" required />
+        </div>
+        <div class="input-box">
+          <i class='bx bxs-lock-alt'></i>
+          <input type="password" id="password" placeholder="Password" required />
+        </div>
+        <button type="submit" class="login-btn">Login</button>
+        <p class="signup-link">
+          Don't have an account? <a href="signup.html">Sign up</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <div class="social-icons">
+    <a href="#"><i class='bx bxl-linkedin'></i></a>
+    <a href="#"><i class='bx bxl-facebook'></i></a>
+    <a href="#"><i class='bx bxl-instagram'></i></a>
+    <a href="#"><i class='bx bxl-twitter'></i></a>
+  </div>
+
+  <div class="privacy-policy">
+    <p>
+      We value your privacy. By using our website
+      <a href="privacy-policy.html">Privacy Policy</a>.
+    </p>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $('#loginForm').submit(function (e) {
+        e.preventDefault();
+    
+        const user = {
+          email: $('#email').val(),
+          password: $('#password').val()
+        };
+    
+        $.ajax({
+          url: "http://127.0.0.1:8000/login",
+          method: "POST",
+          data: JSON.stringify(user),
+          contentType: "application/json",
+          dataType: "json",
+
+
+          success: function (response) {
+          alert("Login Successful!");
+          if (response.access_token) {
+          localStorage.setItem("token", response.access_token);
+        }
+            window.location.href = "/card.html"; 
+              },
+
+          error: function (xhr) {
+            const msg = xhr.responseJSON?.detail || "Unknown error";
+            alert("Login Failed: " + msg);
+          }
+        });
+      });
+    });
+    </script>
+    <script src="/global-chatbot.js"></script>
+</body>
+</html>

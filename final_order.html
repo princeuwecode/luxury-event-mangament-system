@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Luxury Event Booking</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #f8d9a0, #ffe4b5);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .form-wrapper {
+      background: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      max-width: 1100px;
+      width: 100%;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #d4a25a;
+      font-weight: 600;
+      font-size: 28px;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      font-size: 17px;
+      font-weight: 600;
+      color: #d4a25a;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .section-title i {
+      margin-right: 10px;
+      font-size: 18px;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px 35px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: #555;
+      font-size: 14px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      background-color: #fff9f3;
+      transition: all 0.3s ease;
+      resize: vertical;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #d4a25a;
+      background: #fff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(212, 162, 90, 0.3);
+    }
+
+    .error {
+      color: #e74c3c;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    button {
+      grid-column: span 2;
+      padding: 13px;
+      font-size: 16px;
+      font-weight: 600;
+      background: linear-gradient(to right, #d4a25a, #f4c892);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      margin-top: 10px;
+    }
+    .button-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #f4c892, #d4a25a);
+      transform: scale(1.02);
+    }
+
+    @media (max-width: 768px) {
+      .section-grid {
+        grid-template-columns: 1fr;
+      }
+      button {
+        grid-column: span 1;
+      }
+    }
+.payment-options {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
+  color: #555;
+  user-select: none;
+}
+
+.payment-option input[type="radio"] {
+  cursor: pointer;
+  transform: scale(1.1);
+  margin: 0;
+}
+
+.payment-option i {
+  font-size: 18px;
+  color: #d4a25a;
+}
+#qrCodeContainer {
+  display: none;
+  margin-top: 20px;
+}
+.edit-order-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: linear-gradient(to right, #d4a25a, #f4c892);
+  color: white;
+  border: none;
+  padding: 14px 18px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 9999;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.edit-order-btn:hover {
+  transform: scale(1.08);
+  background: linear-gradient(to right, #f4c892, #d4a25a);
+}
+
+
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+</head>
+<body>
+  <div class="form-wrapper">
+    <h2>Luxury Event Management System</h2>
+    <form id="orderForm" novalidate>
+
+      <div class="section">
+        <div class="section-title"><i class="fas fa-user"></i>Personal Details</div>
+        <div class="section-grid">
+          <div>
+            <label for="firstName">First Name *</label>
+            <input type="text" id="firstName" name="firstName" />
+            <div class="error" id="firstNameError"></div>
+          </div>
+          <div>
+            <label for="lastName">Last Name *</label>
+            <input type="text" id="lastName" />
+            <div class="error" id="lastNameError"></div>
+          </div>
+
+          <div>
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" maxlength="10" placeholder="1234567890" />
+            <div class="error" id="phoneError"></div>
+          </div>
+          <div>
+            <label for="altPhone">Alternate Number</label>
+            <input type="tel" id="altPhone" maxlength="10" placeholder="Optional" />
+            <div class="error" id="altPhoneError"></div>
+          </div>
+
+          <div>
+            <label for="email">Email *</label>
+            <input type="email" id="email" placeholder="example@mail.com" />
+            <div class="error" id="emailError"></div>
+          </div>
+          <div>
+            <label for="eventDate">Event Date *</label>
+            <input type="date" id="eventDate" />
+            <div class="error" id="eventDateError"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title"><i class="fas fa-map-marker-alt"></i>Address Details</div>
+        <div class="section-grid">
+          <div>
+            <label for="street">Street Name *</label>
+            <input type="text" id="street" />
+            <div class="error" id="streetError"></div>
+          </div>
+          <div>
+            <label for="houseNumber">House Number *</label>
+            <input type="text" id="houseNumber" />
+            <div class="error" id="houseNumberError"></div>
+          </div>
+
+          <div>
+            <label for="city">City *</label>
+            <input type="text" id="city" />
+            <div class="error" id="cityError"></div>
+          </div>
+          <div>
+            <label for="state">State *</label>
+            <input type="text" id="state" />
+            <div class="error" id="stateError"></div>
+          </div>
+
+          <div>
+            <label for="zip">Zip Code *</label>
+            <input type="text" id="zip" placeholder="6 digits" />
+            <div class="error" id="zipError"></div>
+          </div>
+          <div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title"><i class="fas fa-calendar-alt"></i>Event Details</div>
+        <div class="section-grid">
+          <div>
+            <label for="guestCount">Number of Guests *</label>
+            <input type="number" id="guestCount" min="1" placeholder="eg- 100" />
+            <div class="error" id="guestCountError"></div>
+          </div>
+          <div>
+            <label for="startTime">Event Start Time *</label>
+            <input type="time" id="startTime" />
+            <div class="error" id="startTimeError"></div>
+          </div>
+          <div style="grid-column: span 2;">
+            <label for="specialNotes">Special Instructions (Optional)</label>
+            <textarea id="specialNotes" rows="3" placeholder="Any Special Reqiurements or special gusets "></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title"><i class="fas fa-wallet"></i>Payment Details</div>
+        <div class="section-grid" style="grid-template-columns: 1fr;">
+
+          <label>Preferred Payment Method *</label>
+          <div class="payment-options">
+            <label class="payment-option">
+              <input type="radio" name="paymentMethod" value="cash" />
+              <i class="fas fa-money-bill-wave"></i> Cash
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="paymentMethod" value="card" />
+              <i class="fas fa-credit-card"></i> Card
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="paymentMethod" value="upi" />
+              <i class="fas fa-mobile-alt"></i> UPI
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="paymentMethod" value="netbanking" />
+              <i class="fas fa-university"></i> Net Banking
+            </label>
+          </div>
+          <div class="error" id="paymentMethodError"></div>
+
+          <div style="margin-top: 15px;">
+            <input type="checkbox" id="advancePayment" />
+            <label for="advancePayment" style="display: inline-block; margin-left: 5px;">
+              I want to make an advance payment
+            </label>
+          </div>
+
+          <div style="margin-top: 10px;">
+            <label for="advanceAmount">Advance Payment Amount</label>
+            <input type="number" id="advanceAmount" min="0" placeholder="Enter amount" disabled />
+            <div class="error" id="advanceAmountError"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-wrapper">
+        <button type="submit">Confirm Booking</button>
+      </div>
+
+      <div id="qrCodeContainer">
+        <label>Scan this QR to Pay via UPI</label>
+        <div id="qrcode"></div>
+      </div>
+
+    </form>
+  </div>
+
+  <button class="edit-order-btn" onclick="goToCart()">
+    <i class="fas fa-edit"></i> Edit Order
+  </button>
+  
+
+  <script>
+
+    function goToCart() {
+   window.location.href = "/cart.html";
+    }
+
+    const form = document.getElementById('orderForm');
+    const advanceCheckbox = document.getElementById('advancePayment');
+    const advanceAmountInput = document.getElementById('advanceAmount');
+    const qrContainer = document.getElementById("qrCodeContainer");
+    const qrcodeDiv = document.getElementById("qrcode");
+    const paymentRadios = document.querySelectorAll('input[name="paymentMethod"]');
+    let qr;
+
+  
+    advanceCheckbox.addEventListener('change', () => {
+    advanceAmountInput.disabled = !advanceCheckbox.checked;
+    if (!advanceCheckbox.checked) {
+    advanceAmountInput.value = '';
+    document.getElementById('advanceAmountError').textContent = '';
+    generateQRCode();
+    }
+  });
+
+    
+    advanceAmountInput.addEventListener('input', generateQRCode);
+
+    
+    paymentRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        const selected = document.querySelector('input[name="paymentMethod"]:checked')?.value;
+        if (selected === 'upi') {
+          generateQRCode();
+          qrContainer.style.display = 'block';
+        } else {
+          qrContainer.style.display = 'none';
+          qrcodeDiv.innerHTML = '';
+        }
+      });
+    });
+
+   
+    function generateQRCode() {
+      const upiID = "princekyp377-1@okicici";
+      const name = "Prince Kumar";
+      const amount = advanceCheckbox.checked && advanceAmountInput.value.trim()
+        ? `&am=${advanceAmountInput.value.trim()}`
+        : '';
+      const upiURI = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(name)}${amount}&cu=INR`;
+
+      qrcodeDiv.innerHTML = '';
+      qr = new QRCode(qrcodeDiv, {
+        text: upiURI,
+        width: 220,
+        height: 220
+      });
+    }
+
+  
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const getVal = id => document.getElementById(id).value.trim();
+      const setErr = (id, msg) => document.getElementById(id + 'Error').textContent = msg;
+      const clearErrs = () => form.querySelectorAll('.error').forEach(el => el.textContent = '');
+
+      clearErrs();
+      let valid = true;
+
+      if (!getVal('firstName')) setErr('firstName', 'Required'), valid = false;
+      if (!getVal('lastName')) setErr('lastName', 'Required'), valid = false;
+      if (!/^\d{10}$/.test(getVal('phone'))) setErr('phone', 'Must be 10 digits'), valid = false;
+      if (getVal('altPhone') && !/^\d{10}$/.test(getVal('altPhone'))) setErr('altPhone', 'Must be 10 digits'), valid = false;
+
+      const email = getVal('email');
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) setErr('email', 'Invalid email'), valid = false;
+
+      const eventDate = new Date(getVal('eventDate'));
+      const today = new Date(); today.setHours(0,0,0,0);
+      if (!getVal('eventDate') || eventDate < today) setErr('eventDate', 'Choose a valid future date'), valid = false;
+
+      ['street','houseNumber','city','state'].forEach(id => {
+        if (!getVal(id)) setErr(id, 'Required'), valid = false;
+      });
+
+      if (!/^\d{5,6}$/.test(getVal('zip'))) setErr('zip', 'Enter valid zip code'), valid = false;
+
+      const guestCount = getVal('guestCount');
+      if (!guestCount || isNaN(guestCount) || guestCount <= 0) setErr('guestCount', 'Enter valid guest count'), valid = false;
+
+      if (!getVal('startTime')) setErr('startTime', 'Required'), valid = false;
+
+      const paymentMethod = form.querySelector('input[name="paymentMethod"]:checked');
+      if (!paymentMethod) {
+        setErr('paymentMethod', 'Please select a payment method');
+        valid = false;
+      }
+
+      if (advanceCheckbox.checked) {
+        const advanceAmountVal = getVal('advanceAmount');
+        if (!advanceAmountVal || isNaN(advanceAmountVal) || Number(advanceAmountVal) <= 0) {
+          setErr('advanceAmount', 'Enter valid advance amount');
+          valid = false;
+        }
+      }
+
+  
+      if (valid) {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        doc.setFontSize(18);
+        doc.setTextColor(212, 162, 90);
+        doc.text("Luxury Event Booking Receipt", 105, 25, null, null, 'center');
+
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 0);
+
+        doc.text(`Name: ${getVal('firstName')} ${getVal('lastName')}`, 14, 40);
+        doc.text(`Phone: ${getVal('phone')}`, 14, 50);
+        doc.text(`Email: ${getVal('email')}`, 14, 60);
+        doc.text(`Event Date: ${getVal('eventDate')}`, 14, 70);
+        doc.text(`Guests: ${getVal('guestCount')}`, 14, 80);
+        doc.text(`Start Time: ${getVal('startTime')}`, 14, 90);
+        doc.text(`Address: ${getVal('street')}, ${getVal('houseNumber')}, ${getVal('city')}, ${getVal('state')} - ${getVal('zip')}`, 14, 100);
+        doc.text(`Payment Method: ${paymentMethod.value}`, 14, 110);
+
+        if (advanceCheckbox.checked) {
+          doc.text(`Advance Amount Paid: ₹${getVal('advanceAmount')}`, 14, 120);
+        }
+
+        doc.text("Thank you for your booking!", 14, 140);
+        doc.save(`BookingReceipt_${getVal('firstName')}_${getVal('lastName')}.pdf`);
+
+        form.reset();
+        qrcodeDiv.innerHTML = '';
+        qrContainer.style.display = 'none';
+        advanceAmountInput.disabled = true;
+      }
+   });
+  </script>
+  <script src="/global-chatbot.js"></script>
+</body>
+</html>

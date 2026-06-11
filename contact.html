@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>  Contact</title>
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #fdf2e9, #fdebd0);
+      color: #333;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .contact-section {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 30px;
+      background-color: rgb(244, 225, 200);
+      border-radius: 15px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-section h2 {
+      font-size: 2rem;
+      color: salmon;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .contact-section p.intro {
+      font-size: 1rem;
+      color: #555;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .contact-info {
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .contact-info p {
+      display: flex;
+      align-items: center;
+      margin: 8px 0;
+    }
+
+    .contact-info .icon {
+      margin-right: 10px;
+      font-size: 1.2rem;
+      color: #e67e22;
+      width: 25px;
+      text-align: center;
+    }
+
+    .info-link {
+      color: blue;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 4px 8px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .back-to-home {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: salmon;
+      color: white;
+      font-size: 14px;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: background-color 0.3s ease;
+      text-align: center;
+    }
+
+    .back-to-home:hover {
+      background-color: skyblue;
+    }
+
+    @media screen and (max-width: 600px) {
+      .contact-section {
+        padding: 20px 15px;
+      }
+
+      .contact-info {
+        font-size: 0.95rem;
+      }
+
+      .contact-info p {
+        margin: 6px 0;
+      }
+
+      .info-link {
+        font-size: 0.9rem;
+        padding: 3px 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="contact-section">
+    <h2>Luxury Event Management</h2>
+    <p class="intro">
+      We'd love to assist you! Whether it's a wedding, party, or business event, get in touch with us easily below.
+    </p>
+
+    <div class="contact-info">
+      <p><span class="icon"><i class="fas fa-building"></i></span> <strong>Platform:</strong> Luxury Event Management</p>
+      <p><span class="icon"><i class="fas fa-users"></i></span> <strong>Website Created and Maintained By:</strong>Prince Kumar</p>
+      <p>
+        <span class="icon"><i class="fas fa-phone-alt"></i></span> 
+        <strong>Phone:</strong>
+        <a href="tel:+918252791854" class="info-link">+91 8252791854</a>
+      </p>
+      <p>
+        <span class="icon"><i class="fas fa-envelope"></i></span>
+        <strong>Email:</strong>
+        <a href="mailto:princekyp377@gmail.com" class="info-link">princekyp377@gmail.com</a>
+      </p>
+      <p><span class="icon"><i class="fas fa-map-marker-alt"></i></span> <strong>Location:</strong> Gautam Budh Nagar, Noida, India</p>
+      <p><span class="icon"><i class="fas fa-clock"></i></span> <strong>Support Hours:</strong> Mon-Sat, 10 AM – 7 PM</p>
+    </div>
+
+    <div style="text-align: center;">
+      <a href="/login.html" class="back-to-home">Back to Home</a>
+    </div>
+  </section>
+  <script src="/global-chatbot.js"></script>
+</body>
+</html>
