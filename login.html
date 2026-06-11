@@ -53,40 +53,25 @@
     </p>
   </div>
 
-  <script>
-    $(document).ready(function () {
-      $('#loginForm').submit(function (e) {
+ <script>
+$(document).ready(function () {
+    $('#loginForm').submit(function (e) {
         e.preventDefault();
-    
-        const user = {
-          email: $('#email').val(),
-          password: $('#password').val()
-        };
-    
-        $.ajax({
-          url: "http://127.0.0.1:8000/login",
-          method: "POST",
-          data: JSON.stringify(user),
-          contentType: "application/json",
-          dataType: "json",
 
+        const email = $('#email').val().trim();
+        const password = $('#password').val().trim();
 
-          success: function (response) {
-          alert("Login Successful!");
-          if (response.access_token) {
-          localStorage.setItem("token", response.access_token);
+        if (email === "" || password === "") {
+            alert("Please enter email and password");
+            return;
         }
-            window.location.href = "/card.html"; 
-              },
 
-          error: function (xhr) {
-            const msg = xhr.responseJSON?.detail || "Unknown error";
-            alert("Login Failed: " + msg);
-          }
-        });
-      });
+        alert("Login Successful!");
+        window.location.href = "service.html";
     });
-    </script>
-    <script src="/global-chatbot.js"></script>
+});
+</script>
+
+<script src="global-chatbot.js"></script>
 </body>
 </html>
