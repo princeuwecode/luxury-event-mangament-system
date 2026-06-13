@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luxury Event Assistant</title>
-    <link rel="stylesheet" href="/chatbot.css">
+    <link rel="stylesheet" href="chatbot.css">
 </head>
 <body>
 
@@ -44,68 +44,59 @@
     </div>
 
     <script>
-        function goBack() {
-    window.history.back();
+       async function sendMessage() {
+const input = document.getElementById("userInput");
+const chatBox = document.getElementById("chatBox");
+
+const userText = input.value.trim();
+if (userText === "") return;
+
+const userMsg = document.createElement("div");
+userMsg.className = "user-message";
+userMsg.textContent = userText;
+chatBox.appendChild(userMsg);
+
+input.value = "";
+
+const botMsg = document.createElement("div");
+botMsg.className = "bot-message";
+chatBox.appendChild(botMsg);
+
+const text = userText.toLowerCase();
+
+if (text.includes("service")) {
+    botMsg.innerHTML = "We provide Wedding Events, Birthday Parties, Corporate Events, Catering Services, Decoration Services and Luxury Event Planning.";
+}
+else if (text.includes("wedding")) {
+    botMsg.innerHTML = "Our wedding package includes venue decoration, catering, photography, entertainment and complete event management.";
+}
+else if (text.includes("birthday")) {
+    botMsg.innerHTML = "We organize birthday parties with custom themes, decoration, cake arrangements and catering services.";
+}
+else if (text.includes("menu")) {
+    botMsg.innerHTML = "Our menu includes Veg and Non-Veg starters, beverages, main course dishes and desserts.";
+}
+else if (text.includes("price") || text.includes("pricing")) {
+    botMsg.innerHTML = "Prices depend on event type, guest count and selected services. Please contact us for a custom quotation.";
+}
+else if (text.includes("book") || text.includes("booking")) {
+    botMsg.innerHTML = "You can book an event by contacting us through the Contact page or by filling out the booking form.";
+}
+else if (text.includes("theme") || text.includes("decoration")) {
+    botMsg.innerHTML = "Yes, we provide luxury decoration themes for weddings, birthdays, corporate events and special occasions.";
+}
+else if (text.includes("contact") || text.includes("about")) {
+    botMsg.innerHTML = "You can find our contact details on the Contact page. We are available by phone and email.";
+}
+else {
+    botMsg.innerHTML = "Thank you for your question. Please explore our Services, Menu, Contact and About pages for more information.";
 }
 
-function quickAsk(question) {
-    document.getElementById("userInput").value = question;
-    sendMessage();
+chatBox.scrollTop = chatBox.scrollHeight;
+
+
 }
 
-async function sendMessage() {
-    const input = document.getElementById("userInput");
-    const chatBox = document.getElementById("chatBox");
-
-    const userText = input.value.trim();
-    if (userText === "") return;
-
-    // User Message
-    const userMsg = document.createElement("div");
-    userMsg.className = "user-message";
-    userMsg.textContent = userText;
-    chatBox.appendChild(userMsg);
-
-    input.value = "";
-
-    // Bot Loading Message
-    const botMsg = document.createElement("div");
-    botMsg.className = "bot-message";
-    botMsg.textContent = "Typing...";
-    chatBox.appendChild(botMsg);
-
-    chatBox.scrollTop = chatBox.scrollHeight;
-
-    try {
-        const response = await fetch("http://127.0.0.1:8000/chat", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ message: userText })
-        });
-
-        const data = await response.json();
-        botMsg.innerHTML = data.reply;
-
-    } catch (error) {
-        botMsg.textContent = "Sorry, the assistant is currently unavailable.";
-        console.error(error);
-    }
-
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-// Enter key support
-document.addEventListener("DOMContentLoaded", function () {
-    const input = document.getElementById("userInput");
-
-    input.addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-            sendMessage();
-        }
-    });
-});
     </script>
     
 </body>
