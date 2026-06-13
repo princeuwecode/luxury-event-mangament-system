@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luxury Event Assistant</title>
-    <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="/chatbot.css">
 </head>
 <body>
 
@@ -44,6 +44,18 @@
     </div>
 
     <script>
+        function goBack() {
+    window.history.back();
+}
+
+function quickAsk(question) {
+    document.getElementById("userInput").value = question;
+    sendMessage();
+}
+
+async function sendMessage(){
+
+
        async function sendMessage() {
 const input = document.getElementById("userInput");
 const chatBox = document.getElementById("chatBox");
@@ -96,7 +108,7 @@ chatBox.scrollTop = chatBox.scrollHeight;
 
 
 }
-
+}
     </script>
     
 </body>
