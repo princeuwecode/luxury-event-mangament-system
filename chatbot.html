@@ -44,18 +44,7 @@
     </div>
 
     <script>
-        function goBack() {
-    window.history.back();
-}
-
-function quickAsk(question) {
-    document.getElementById("userInput").value = question;
-    sendMessage();
-}
-
-async function sendMessage(){
-
-
+        
        async function sendMessage() {
 const input = document.getElementById("userInput");
 const chatBox = document.getElementById("chatBox");
@@ -108,7 +97,7 @@ chatBox.scrollTop = chatBox.scrollHeight;
 
 
 }
-}
+
     </script>
     
 </body>
